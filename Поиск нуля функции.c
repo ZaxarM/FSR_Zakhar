@@ -32,4 +32,15 @@ double solver1_2 (double (*f)(double x),double a, double b,double eps,double *de
     *delta=b-a;
     return (a+b)/2;
 }
+int main(){
+    double y,a,b,eps;
+    int n;
+    double delta;
+    scanf("%lf",&a);
+    scanf("%lf",&b);
+    scanf("%lf",&eps);
+    y=solver1_2(f,a,b,eps,&delta,&n);
+    printf("%.15lf %.15lf %d",y,delta,n);
+    return 0;
+}
 
