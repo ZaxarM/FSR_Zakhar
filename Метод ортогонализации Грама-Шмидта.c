@@ -25,10 +25,5 @@ void GS_orth(int n,int k, double mat[k][n], double orth_mat[k][n]){
                 orth_mat[i][l]=orth_mat[i][l]-d*orth_mat[j][l];
         }
     }
-    for (i=0;i<k;i++){
-        for (j=0;j<n;j++)
-            printf("%lf ",orth_mat[i][j]);
-        printf("\n");
-    }
     return;
 }
