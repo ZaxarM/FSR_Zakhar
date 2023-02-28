@@ -32,16 +32,3 @@ void GS_orth(int n,int k, double mat[k][n], double orth_mat[k][n]){
     }
     return;
 }
-int main(){
-    int n,k,i,j;
-    scanf("%d",&n);
-    scanf("%d",&k);
-    double mat[k][n];
-    double orth_mat[k][n];
-    for (i=0;i<k;i++)
-        for (j=0;j<n;j++)
-            scanf("%lf",&mat[i][j]);
-    GS_orth(n,k,mat,orth_mat);
-    return 0;
-}
-
