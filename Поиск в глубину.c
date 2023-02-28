@@ -50,5 +50,8 @@ int find_adj_comp(int V, int adj_mat[V][V]){
                 printf("%d ",j+1);
     }
     return cnt;
+    
+    
+    
 }
 
