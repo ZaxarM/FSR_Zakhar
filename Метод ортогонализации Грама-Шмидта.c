@@ -1,13 +1,6 @@
 #include <stdio.h>
 #include <math.h>
 
-double scalar (int n, double a1[n], double a2[n]){
-    int i;
-    double res=0;
-    for (i=0;i<n;i++)
-        res=res+a1[i]*a2[i];
-    return res;
-}
 double norm (int n, double a[n]){
     int i;
     double res=0;
@@ -51,3 +44,4 @@ int main(){
     GS_orth(n,k,mat,orth_mat);
     return 0;
 }
+
