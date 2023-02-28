@@ -52,20 +52,3 @@ int find_adj_comp(int V, int adj_mat[V][V]){
     return cnt;
 }
 
-int main(){
-    int n,m,i,j,x,y;
-    scanf("%d",&n);
-    scanf("%d",&m);
-    int adj_mat[n][n];
-    for (i=0;i<n;i++)
-        for (j=0;j<n;j++)
-            adj_mat[i][j]=0;
-    for (i=0;i<m;i++){
-        scanf("%d",&x);
-        scanf("%d",&y);
-        adj_mat[x-1][y-1]=1;
-        adj_mat[y-1][x-1]=1;
-    }
-    find_adj_comp(n,adj_mat);
-    return 0;
-}
