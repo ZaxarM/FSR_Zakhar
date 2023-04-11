@@ -77,8 +77,8 @@ void precrocess_image_gauss(char* image, int width, int height){
 }
 
 void add_edge(int w, int h,int x1,int y1,int x2,int y2,mat[h*w][h*w]){
-    mat[x1*w+y1][x2*w+y2] = 1;
-    mat[x2*w+y2][x1*w+y1] = -1;
+    mat[x1*w+y1][x2*w+y2]=1;
+    mat[x2*w+y2][x1*w+y1]=1;
     return 0;
 }
 
