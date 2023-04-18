@@ -14,31 +14,26 @@ char* loadPng(const char* filename, int* width, int* height) {
   {
     printf("error %u: %s\n", error, lodepng_error_text(error));
   }
-
   return (image);
 }
 
 void writePng(const char* filename, const unsigned char* image, unsigned width, unsigned height) {
   unsigned char* png;
   int pngsize;
-
   int error = lodepng_encode32(&png, &pngsize, image, width, height);
   if(!error) {
     lodepng_save_file(png, pngsize, filename);
   }
   if(error) printf("error %u: %s\n", error, lodepng_error_text(error));
-
-  free(png);
+    free(png);
 }
 
 void get_pixel(int x, int y, int *r, int *g, int *b, int *a, char* image, int width )
 {
-
    *r =  image[4 * width * y + 4 * x + 0];
    *g =  image[4 * width * y + 4 * x + 1];
    *b =  image[4 * width * y + 4 * x + 2];
    *a =  image[4 * width * y + 4 * x + 3];
-
    return;
 }
 
@@ -50,7 +45,6 @@ bool is_close(int r1, r2, g1, g2, b1, b2) {
     }
 
 bool is_black(int r, g, b) {
-  // Here is the place for experiments and improvments
       int gray=(r+g+b)/3;
       if ( gray < 128 ) {
         return true;
