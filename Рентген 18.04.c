@@ -3,6 +3,7 @@
 #define e_r
 #define e_g
 #define e_b
+#define e_a
 
 char* loadPng(const char* filename, int* width, int* height) {
 
@@ -16,7 +17,7 @@ char* loadPng(const char* filename, int* width, int* height) {
   }
   return (image);
 }
-
+ 
 void writePng(const char* filename, const unsigned char* image, unsigned width, unsigned height) {
   unsigned char* png;
   int pngsize;
@@ -37,11 +38,12 @@ void get_pixel(int x, int y, int *r, int *g, int *b, int *a, char* image, int wi
    return;
 }
 
-bool is_close(int r1, r2, g1, g2, b1, b2) {
+bool is_close(int r1, int g1, int b1, int a1, int r2, int g2, int b2, int a2) {
     int e_r = 10;
     return fabs(r1 - r2) < e_r
         &&  fabs(g1 - g2) < e_g
         &&  fabs(b1 - b2) < e_b
+        &&  fabs(a1 - a2) < e_a
     }
 
 bool is_black(int r, g, b) {
@@ -85,14 +87,26 @@ Graph*init_graph(int v) {
     return pG;
 }
 void add_edge(Graph *G, int i,int j,int x,int y,int width,Graph*coh_ar[w*h]) {
-  int n=i*width+j;
-  int m=x*width+y;
-  tmp_el=init_graph(m);
-  tmp_el->next=coh_ar[n]
-  coh_ar[n]=tmp_el;
-  return;
+    int n=i*width+j;
+    int m=x*width+y;
+    tmp_el=init_graph(m);
+    tmp_el->next=coh_ar[n]
+    coh_ar[n]=tmp_el;
+    return;
 }
-
+void DFS (int V,Graph*coh_ar[w*h],int col[V],int vert){
+    if (col[vert]){
+        printf("visited");
+        return;
+    }
+    col[vert]=-1;
+    int i;
+    Graph*tmp;
+    while(tmp!=NULL)
+        if(!col[tmp->v])
+            DFS(V,coh_ar,col,tmp->v);
+    col[vert]=1;
+}
 int main() {
     char *filename = "skull.png";
     int w, h;
@@ -132,8 +146,11 @@ int main() {
 
         }
     }
+    int col[w*h];
+    for (i=0;i<w*h;i++)
+        col[i]=0;
+    DFS(w*h,coh_ar,col,0);
     char * new_image = "scull-modified.png";
     writePng(new_image, picture, w, h);
     return 0;
 }
-
