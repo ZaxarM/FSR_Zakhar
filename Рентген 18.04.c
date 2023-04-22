@@ -1,15 +1,14 @@
 #include "lodepng.h"
 #include <stdio.h>
-#define e_r
-#define e_g
-#define e_b
-#define e_a
+#include<stdlib.h>
+#include <math.h>
+#define e_r 10
+#define e_g 10
+#define e_b 10
+#define e_a 10
 
 char* loadPng(const char* filename, int* width, int* height) {
-
   unsigned char* image = NULL;
-  unsigned int width, height;
-
   int error = lodepng_decode32_file(&image, width, height, filename);
   if(error)
   {
@@ -17,7 +16,7 @@ char* loadPng(const char* filename, int* width, int* height) {
   }
   return (image);
 }
- 
+
 void writePng(const char* filename, const unsigned char* image, unsigned width, unsigned height) {
   unsigned char* png;
   int pngsize;
@@ -38,20 +37,21 @@ void get_pixel(int x, int y, int *r, int *g, int *b, int *a, char* image, int wi
    return;
 }
 
-bool is_close(int r1, int g1, int b1, int a1, int r2, int g2, int b2, int a2) {
-    int e_r = 10;
-    return fabs(r1 - r2) < e_r
+int is_close(int r1, int g1, int b1, int a1, int r2, int g2, int b2, int a2) {
+    if (fabs(r1-r2) < e_r
         &&  fabs(g1 - g2) < e_g
         &&  fabs(b1 - b2) < e_b
-        &&  fabs(a1 - a2) < e_a
+        &&  fabs(a1 - a2) < e_a)
+        return 1;
+    else return 0;
     }
 
-bool is_black(int r, g, b) {
+int is_black(int r, int g, int b) {
       int gray=(r+g+b)/3;
       if ( gray < 128 ) {
-        return true;
+        return 1;
       } else
-        return false;
+        return 0;
 }
 void precrocess_image_gauss(char* image, int width, int height){
     int x,y,i,j;
@@ -69,32 +69,41 @@ void precrocess_image_gauss(char* image, int width, int height){
         for (y=1;y<height-1;y++)
             for (i=-1;i<=1;i++)
                 for (j=-1;j<=1;j++)
-                    image[x+i][x+j]+=G[2-i][2-j];
+                    image[x+i]+=G[2-i][2-j];
 }
 struct Graph {
     struct Graph*next;
     int v; // number of vertices of G;
 } typedef Graph;
 
-Graph*init_graph(int v) {
-    Graph*pG = (Graph*)malloc(sizeof(Graph));
+Graph* init_graph(int v) {
+    Graph* pG=(Graph*)malloc(sizeof(Graph));
     if (pG==NULL)
         printf("Memory error");
     else{
-        tmp->v=v;
-        tmp->next=NULL;
+        pG->v=v;
+        pG->next=NULL;
     }
     return pG;
 }
-void add_edge(Graph *G, int i,int j,int x,int y,int width,Graph*coh_ar[w*h]) {
-    int n=i*width+j;
-    int m=x*width+y;
+void add_edge(int i,int j,int x,int y,int w,int h,Graph*coh_ar[w*h]) {
+    int n=i*w+j;
+    int m=x*w+y;
+    Graph*tmp_el;
     tmp_el=init_graph(m);
-    tmp_el->next=coh_ar[n]
+    tmp_el->next=coh_ar[n];
     coh_ar[n]=tmp_el;
     return;
 }
-void DFS (int V,Graph*coh_ar[w*h],int col[V],int vert){
+void set_pixel(int x, char* image){
+   image[4*x+0]=255;
+   image[4*x+1]=0;
+   image[4*x+2]=0;
+   image[4*x+3]=0;
+   return;
+}
+
+void DFS (int V,Graph*coh_ar[V],int col[V],int vert,char* image,int width){
     if (col[vert]){
         printf("visited");
         return;
@@ -104,12 +113,14 @@ void DFS (int V,Graph*coh_ar[w*h],int col[V],int vert){
     Graph*tmp;
     while(tmp!=NULL)
         if(!col[tmp->v])
-            DFS(V,coh_ar,col,tmp->v);
+            DFS(V,coh_ar,col,tmp->v,image,width);
     col[vert]=1;
+    set_pixel(i,image);
+    return;
 }
 int main() {
     char *filename = "skull.png";
-    int w, h;
+    int w, h, i;
     char *picture = loadPng(filename, &w, &h);
     if (picture == NULL){
         printf("I can not read the picture from the file %s. Error.\n", filename);
@@ -122,26 +133,21 @@ int main() {
             int r, g, b, a;
             int r1, g1, b1, a1;
             get_pixel(i, j, &r, &g, &b, &a, picture, w);
-            get_pixel(i-1, j, &r1, &g1, &b1, &a1, picture, w );
-            if (is_close(r,  g,  b,  a,
-                         r1, g1, b1, a1  )) {
-                        add_edge(i,j,i-1,j,w,coh_ar);
+            get_pixel(i-1, j, &r1, &g1, &b1, &a1, picture, w);
+            if (is_close(r,  g,  b,  a, r1, g1, b1, a1  )) {
+                        add_edge(i,j,i-1,j,w,h,coh_ar);
                          }
-
-            get_pixel(i+1, j, &r1, &g1, &b1, &a1, picture, w );
-            if (is_close(r,  g,  b,  a,
-                         r1, g1, b1, a1  )) {
-                        add_edge(i,j,i+1,j,w,coh_ar);
+            get_pixel(i+1, j, &r1, &g1, &b1, &a1, picture, w);
+            if (is_close(r,  g,  b,  a, r1, g1, b1, a1  )) {
+                        add_edge(i,j,i+1,j,w,h,coh_ar);
                          }
-            get_pixel(i, j-1, &r1, &g1, &b1, &a1, picture, w );
-            if (is_close(r,  g,  b,  a,
-                         r1, g1, b1, a1,  )) {
-                        add_edge(i,j,i,j-1,w,coh_ar);
+            get_pixel(i, j-1, &r1, &g1, &b1, &a1, picture, w);
+            if (is_close(r,  g,  b,  a, r1, g1, b1, a1 )) {
+                        add_edge(i,j,i,j-1,w,h,coh_ar);
             }
-            get_pixel(i, j+1, &r1, &g1, &b1, &a1, picture, w );
-            if (is_close(r,  g,  b,  a,
-                         r1, g1, b1, a1  )) {
-                        add_edge(i,j,i,j+1,w,coh_ar);
+            get_pixel(i, j+1, &r1, &g1, &b1, &a1, picture, w);
+            if (is_close(r,  g,  b,  a, r1, g1, b1, a1  )) {
+                        add_edge(i,j,i,j+1,w,h,coh_ar);
             }
 
         }
@@ -149,7 +155,9 @@ int main() {
     int col[w*h];
     for (i=0;i<w*h;i++)
         col[i]=0;
-    DFS(w*h,coh_ar,col,0);
+    for (i=0;i<w*h;i++)
+        if (col[i]==0)
+            DFS(w*h,coh_ar,col,i,picture,w);
     char * new_image = "scull-modified.png";
     writePng(new_image, picture, w, h);
     return 0;
