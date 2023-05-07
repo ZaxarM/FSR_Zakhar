@@ -1,0 +1,89 @@
+#include "lodepng.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+char* loadPng(const char* filename, int* width, int* height) {
+  unsigned char* image = NULL;
+  int error = lodepng_decode32_file(&image, width, height, filename);
+  if(error)
+    printf("error %u: %s\n", error, lodepng_error_text(error));
+  return image;
+}
+void writePng(const char* filename, const unsigned char* image, unsigned width, unsigned height) {
+  unsigned char* png;
+  long unsigned int pngsize;
+  int error = lodepng_encode32(&png, &pngsize, image, width, height);
+  if(!error)
+    lodepng_save_file(png, pngsize, filename);
+  if(error) printf("error %u: %s\n", error, lodepng_error_text(error));
+    free(png);
+}
+void rgb(unsigned char *image,unsigned char *image1, int width, int heigth){
+    int i;
+    for (i=0;i<width*heigth;i++)
+        image1[i]=0.299*image[4*i]+0.587*image[4*i+1]+0.114*image[4*i+2];
+    return;
+}
+void is_black(unsigned char *image, int w, int h){
+    int i,j;
+    for(i=2;i<h-1;i++)
+        for(j=2;j<w-1;j++){
+            if(image[w*i+j]<100)
+                image[w*i+j]=0;
+            if(image[w*i+j]>160)
+                image[w*i+j]=255;
+        }
+    return;
+}
+void precrocess_image_gauss(char* image, int width, int height){
+    int x,y,i,j;
+    double G[3][3];
+    G[0][0]=0.0924;
+    G[0][1]=0.1192;
+    G[0][2]=0.0924;
+    G[1][0]=0.1192;
+    G[1][1]=0.1538;
+    G[1][2]=0.1192;
+    G[2][0]=0.0924;
+    G[2][1]=0.1192;
+    G[2][2]=0.0924;
+    for (x=1;x<width-1;x++)
+        for (y=1;y<height-1;y++)
+            for (i=-1;i<=1;i++)
+                for (j=-1;j<=1;j++)
+                    image[x+i]+=G[2-i][2-j];
+}
+void set_pixel(int x, char* image, char* image1){
+   image1[4*x+0]=10+image[x];
+   image1[4*x+1]=75+image[x]+0.5*image[x-1];
+   image1[4*x+2]=120+image[x];
+   image1[4*x+3]=255;
+   return;
+}
+void paint(char* image, char* image1, int width, int heigh){
+    int i;
+    for (i=0;i<width*heigh;i++)
+        set_pixel(i,image,image1);
+    return;
+}
+int main() {
+    char * filename = "skull.png";
+    int w,h;
+    int i,j,k=0;
+    int size;
+    char * picture = loadPng(filename, &w, &h);
+    if (picture == NULL){
+        printf("I can not read the picture from the file %s. Error.\n", filename);
+        return -1;
+    }
+    unsigned char *tmp_picture=(unsigned char*)malloc(h*w*sizeof(unsigned char));
+    unsigned char *tmp1_picture=(unsigned char*)malloc(4*h*w*sizeof(unsigned char));
+    rgb(picture,tmp_picture,w,h);
+    is_black(tmp_picture,w,h);
+    precrocess_image_gauss(tmp_picture,w,h);
+    paint(tmp_picture,tmp1_picture,w,h);
+    char * new_image = "skull-modified.png";
+    writePng(new_image, tmp1_picture, w, h);
+    return 0;
+}
