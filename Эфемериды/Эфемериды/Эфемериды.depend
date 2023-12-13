@@ -1,0 +1,67 @@
+# depslib dependency file v1.0
+1702472188 source:c:\users\egsav\desktop\Ёфемериды\main.cpp
+	<iostream>
+	<fstream>
+	<sstream>
+	<cmath>
+	<string>
+	"Except.h"
+	"Parcer.h"
+	"Solution.h"
+	"Solver.h"
+	"Analyser.h"
+	"Presenter.h"
+
+1702468082 source:c:\users\egsav\desktop\Ёфемериды\src\except.cpp
+	"Except.h"
+	<iostream>
+
+1702468082 c:\users\egsav\desktop\Ёфемериды\include\except.h
+
+1702470442 c:\users\egsav\desktop\Ёфемериды\include\parcer.h
+	<fstream>
+	<sstream>
+	<string>
+	"Except.h"
+
+1702469263 source:c:\users\egsav\desktop\Ёфемериды\src\solution.cpp
+	"Solution.h"
+
+1702469263 c:\users\egsav\desktop\Ёфемериды\include\solution.h
+	<string>
+
+1702470404 source:c:\users\egsav\desktop\Ёфемериды\src\parcer.cpp
+	"Parcer.h"
+
+1702470994 c:\users\egsav\desktop\Ёфемериды\include\solver.h
+	"Parcer.h"
+	"Solution.h"
+
+1702471089 source:c:\users\egsav\desktop\Ёфемериды\src\solver.cpp
+	"Solver.h"
+	"Except.h"
+	"Parcer.h"
+	<iostream>
+	<cmath>
+
+1702471549 source:c:\users\egsav\desktop\Ёфемериды\src\analyser.cpp
+	"Analyser.h"
+	"Solution.h"
+
+1702471549 c:\users\egsav\desktop\Ёфемериды\include\analyser.h
+	"Solution.h"
+
+1702472458 c:\users\egsav\desktop\Ёфемериды\include\presenter.h
+	"Solution.h"
+	"Parcer.h"
+	"Analyser.h"
+
+1702472551 source:c:\users\egsav\desktop\Ёфемериды\src\presenter.cpp
+	"Presenter.h"
+	"Except.h"
+	"Parcer.h"
+	"Solution.h"
+	"Solver.h"
+	"Analyser.h"
+	<iostream>
+
