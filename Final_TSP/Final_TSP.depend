@@ -1,0 +1,55 @@
+# depslib dependency file v1.0
+1710078373 source:c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\final_tsp\main.cpp
+	<iostream>
+	<fstream>
+	<vector>
+	<algorithm>
+	<cmath>
+	<climits>
+	<Parcer.h>
+	<TSP_Parcer.h>
+	<DB.h>
+	<TSP_DB.h>
+	<Solver.h>
+
+1710077237 source:c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\final_tsp\src\tsp_parcer.cpp
+	"TSP_Parcer.h"
+
+1710076052 c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\final_tsp\include\tsp_parcer.h
+	<Parcer.h>
+	<fstream>
+	<iostream>
+
+1710077237 c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\final_tsp\include\parcer.h
+	<vector>
+	<string>
+	<utility>
+
+1710072211 source:c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\final_tsp\src\parcer.cpp
+	"Parcer.h"
+
+1710072408 source:c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\final_tsp\src\db.cpp
+	"DB.h"
+
+1710078368 c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\final_tsp\include\db.h
+	<string>
+	<vector>
+	<utility>
+	"TSP_Parcer.h"
+
+1710078368 c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\final_tsp\include\tsp_db.h
+	"DB.h"
+	"TSP_Parcer.h"
+
+1710078368 source:c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\final_tsp\src\tsp_db.cpp
+	"TSP_DB.h"
+
+1710077275 source:c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\final_tsp\src\solver.cpp
+	"solver.h"
+
+1710077237 c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\final_tsp\include\solver.h
+	<iostream>
+	<vector>
+	<cmath>
+	<algorithm>
+
