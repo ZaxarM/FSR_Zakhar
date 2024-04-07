@@ -1,0 +1,38 @@
+# depslib dependency file v1.0
+1712505957 source:c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\knapsack problem\main.cpp
+	<iostream>
+	<vector>
+	<cstdlib>
+	<ctime>
+	"Parser.h"
+	"Thing.h"
+	"Solver.h"
+
+1712474903 source:c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\knapsack problem\src\parser.cpp
+	"Parser.h"
+	<fstream>
+	<iostream>
+
+1712441792 c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\knapsack problem\include\parser.h
+	<fstream>
+	<iostream>
+	<random>
+	<vector>
+	"Thing.h"
+	<string>
+
+1712440347 c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\knapsack problem\include\thing.h
+
+1712440347 source:c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\knapsack problem\src\thing.cpp
+	"Thing.h"
+
+1712505837 source:c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\knapsack problem\src\solver.cpp
+	"Solver.h"
+
+1712516559 c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\knapsack problem\include\solver.h
+	<iostream>
+	<vector>
+	<algorithm>
+	<ctime>
+	"Thing.h"
+
