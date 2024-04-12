@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1712955323 source:c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\Жадная расскраска графа\main.cpp
+	<iostream>
+	"Parser.h"
+	"Solver.h"
+
+1712951338 source:c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\Жадная расскраска графа\src\parser.cpp
+	"Parser.h"
+	<fstream>
+	<iostream>
+
+1712948689 c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\Жадная расскраска графа\include\parser.h
+	<fstream>
+	<iostream>
+	<random>
+	<vector>
+	<string>
+
+1712955859 source:c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\Жадная расскраска графа\src\solver.cpp
+	"Solver.h"
+	<iostream>
+
+1712955981 c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\Жадная расскраска графа\include\solver.h
+	<vector>
+	<unordered_map>
+	<set>
+
