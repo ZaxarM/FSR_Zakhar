@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1714252717 source:c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\Ветви и границы\main.cpp
+	<iostream>
+	<fstream>
+	<vector>
+	<algorithm>
+	"Item.h"
+	"Parser.h"
+	"Solver.h"
+
+1714233003 source:c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\Ветви и границы\src\parser.cpp
+	"Parser.h"
+
+1714233003 c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\Ветви и границы\include\parser.h
+	<iostream>
+	<fstream>
+	<vector>
+	"Item.h"
+
+1714253188 c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\Ветви и границы\include\item.h
+
+1714252717 c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\Ветви и границы\include\solver.h
+	"Item.h"
+	<vector>
+
+1714253352 source:c:\users\egsav\desktop\ФКИ\Практикум на ЭВМ\Ветви и границы\src\solver.cpp
+	"Solver.h"
+	<algorithm>
+
